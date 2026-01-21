@@ -1,0 +1,21 @@
+# Ignorer le fichier .env (contient les secrets)
+.env
+
+# Ignorer le fichier secret RCE (généré par init_database.php)
+secret_rce.txt
+
+# Base de données (sera générée)
+database.sqlite
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+*.log

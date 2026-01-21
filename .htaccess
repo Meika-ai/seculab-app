@@ -1,0 +1,33 @@
+# VULNÉRABILITÉ VOLONTAIRE : Ce .htaccess est faible
+# Les étudiants devront le renforcer en Phase 2
+
+# URL Rewriting pour le routeur
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# PROBLÈME : Le fichier .env est accessible directement !
+# Solution : Ajouter cette règle
+# <Files ".env">
+#     Require all denied
+# </Files>
+
+# PROBLÈME : La base SQLite est accessible !
+# Solution : Ajouter cette règle
+# <Files "*.sqlite">
+#     Require all denied
+# </Files>
+
+# PROBLÈME : Les signatures serveur sont visibles
+# Solution : Décommenter ces lignes
+# ServerSignature Off
+# Header unset X-Powered-By
+
+# PROBLÈME : Pas de protection contre le clickjacking
+# Solution : Ajouter cette ligne
+# Header always set X-Frame-Options "SAMEORIGIN"
+
+# PROBLÈME : Pas de Content Security Policy
+# Solution : Ajouter une CSP stricte
+# Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src fonts.gstatic.com"
